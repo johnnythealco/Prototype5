@@ -5,6 +5,7 @@ using System;
 public class Unit : MonoBehaviour
 {
 	public UnitClass unitClass;
+	public Player owner;
 
 
 	private String displayName;
@@ -15,6 +16,7 @@ public class Unit : MonoBehaviour
 	private float enginesHealth;
 	private float weaponsHealth;
 	private float movementRange;
+
 
 	public String		DisplayName{ get { return displayName; } }
 
@@ -33,6 +35,14 @@ public class Unit : MonoBehaviour
 	public float		MovementRange{ get { return movementRange; } }
 
 	public bool initalized;
+
+	public String		OwnerName{ 
+		get { 
+			if(owner != null)
+			return owner.displayName;
+			else
+				return "";
+		} }
 
 
 

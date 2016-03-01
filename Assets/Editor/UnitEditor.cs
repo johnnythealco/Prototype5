@@ -30,7 +30,7 @@ public class UnitEditor : Editor
 				_unit.initalizeUnit ();
 			}
 		}
-
+		EditorGUILayout.LabelField ("Owner:", _unit.OwnerName);
 		EditorGUILayout.LabelField ("Display Name:", _unit.DisplayName);
 		EditorGUILayout.LabelField ("Action Points:", _unit.ActionPoints.ToString ()); 
 		EditorGUILayout.LabelField ("");

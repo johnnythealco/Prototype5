@@ -14,12 +14,12 @@ public class Sector : GLMonoBehaviour
 	public static FlatHexGrid<Cell> Grid{ get; set; }
 	public static IMap3D<FlatHexPoint> Map{ get; set;}
 
-	public FlatHexPoint northSpawn;
-	public FlatHexPoint southSpawn;
-	public FlatHexPoint northEastSpwan;
-	public FlatHexPoint northWestSpawn;
-	public FlatHexPoint southEastSpwan;
-	public FlatHexPoint southWestSpawn;
+	public static FlatHexPoint northSpawn;
+	public static FlatHexPoint southSpawn;
+	public static FlatHexPoint northEastSpwan;
+	public static FlatHexPoint northWestSpawn;
+	public static FlatHexPoint southEastSpwan;
+	public static FlatHexPoint southWestSpawn;
 
 
 
@@ -28,8 +28,7 @@ public class Sector : GLMonoBehaviour
 		
 		BuildGrid ();
 
-		createSpawnpoints ();
-
+	
 
 	}
 	
@@ -67,6 +66,7 @@ public class Sector : GLMonoBehaviour
 
 		}
 		positionCollider ();
+		createSpawnpoints ();
 	}
 
 	void positionCollider()
@@ -101,6 +101,53 @@ public class Sector : GLMonoBehaviour
 		Grid [southWestSpawn].Color = Color.red;
 	}
 
+
+
+	/**
+	 * Returns a list of Flat Hex Points including the start and end points
+	 * accounting for isAccesible and cost for each cell along the path 
+	 * */
+	public List<FlatHexPoint> getGridPath(FlatHexPoint start, FlatHexPoint end)
+	{
+		List<FlatHexPoint> path = new List<FlatHexPoint> ();
+
+
+		var _path = Algorithms.AStar<Cell, FlatHexPoint>
+		(Grid, start, end,
+			(p, q) => p.DistanceFrom (q),
+			c => c.isAccessible,
+			(p, q) => (Grid [p].Cost + Grid [q].Cost / 2)
+		);
+
+		foreach(var step in _path)
+		{
+			path.Add (step); 
+
+		}
+
+		return path;
+	}
+
+	/**
+	 * Returns a list of Vector3s including the start and end Vector3s
+	 * accounting for isAccesible and cost for each cell along the path 
+	 * */
+	public List<Vector3> getGridPath(Vector3 start, Vector3 end)
+	{
+		List<Vector3> path = new List<Vector3> ();
+		var _start = Map [start];
+		var _end = Map [end];
+
+		var _path = getGridPath (_start, _end);
+
+		foreach (var step in _path)
+		{
+			path.Add (Map [step]);
+
+		}
+
+		return path;
+	}
 
 
 
