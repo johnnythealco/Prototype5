@@ -6,10 +6,10 @@ using Gamelogic;
 
 public class Cell : SpriteCell
 {
-	public Unit unit;
+	public UnitController unit;
 	public bool isAccessible = true;
 	public float Cost = 1;
-	public Color[] colors; 
+	public Color[] colors;
 	public Contents contents;
 
 
@@ -17,6 +17,11 @@ public class Cell : SpriteCell
 
 
 
-	public enum Contents{empty, unit}
+	public enum Contents
+	{
+empty,
+		unit
+
+	}
 
 }

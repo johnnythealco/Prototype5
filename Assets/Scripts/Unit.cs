@@ -2,10 +2,11 @@
 using System.Collections;
 using System;
 
-public class Unit : MonoBehaviour
+[System.Serializable]
+public class Unit : System.Object
 {
-	public UnitClass unitClass;
-	public Player owner;
+	
+
 
 
 	private String displayName;
@@ -16,6 +17,8 @@ public class Unit : MonoBehaviour
 	private float enginesHealth;
 	private float weaponsHealth;
 	private float movementRange;
+
+	public Player 		Owner { get; set; }
 
 
 	public String		DisplayName{ get { return displayName; } }
@@ -34,20 +37,21 @@ public class Unit : MonoBehaviour
 
 	public float		MovementRange{ get { return movementRange; } }
 
-	public bool initalized;
 
-	public String		OwnerName{ 
+
+	public String		OwnerName { 
 		get { 
-			if(owner != null)
-			return owner.displayName;
+			if (Owner != null)
+				return Owner.displayName;
 			else
 				return "";
-		} }
+		}
+	}
 
 
 
 
-	public void initalizeUnit ()
+	public void initalizeUnit (UnitClass unitClass)
 	{
 		displayName = unitClass.displayName;
 		actionPoints = unitClass.actionPoints;
@@ -57,7 +61,7 @@ public class Unit : MonoBehaviour
 		enginesHealth = unitClass.enginesHealth;
 		weaponsHealth = unitClass.weaponsHealth;
 		movementRange = unitClass.movementRange; 
-		initalized = true;
+
 	}
 
 
