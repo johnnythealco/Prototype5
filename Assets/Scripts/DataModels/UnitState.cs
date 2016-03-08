@@ -7,7 +7,7 @@ public class UnitState : System.Object
 {
 	
 
-	public UnitClass unitClass;
+	private UnitClass unitClass;
 
 	private String displayName;
 	private int actionPoints;
@@ -18,6 +18,7 @@ public class UnitState : System.Object
 	private float weaponsHealth;
 	private float movementRange;
 
+	#region Properties
 
 	public Player 		Owner { get; set; }
 
@@ -51,8 +52,20 @@ public class UnitState : System.Object
 		}
 	}
 
+	#endregion
 
-
+	public UnitState(UnitClass _unitClass)
+	{
+		this.unitClass = _unitClass;
+		this.displayName = _unitClass.displayName;
+		this.actionPoints = _unitClass.actionPoints;
+		this.initiative = _unitClass.initiative;
+		this.health = _unitClass.health;
+		this.evasion = _unitClass.evasion;
+		this.enginesHealth = _unitClass.enginesHealth;
+		this.weaponsHealth = _unitClass.weaponsHealth;
+		this.movementRange = _unitClass.movementRange; 
+	}
 
 	public void initalize ()
 	{

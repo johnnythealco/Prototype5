@@ -12,7 +12,7 @@ public class Battle : GridBehaviour<FlatHexPoint>
 	public static Battle Manager;
 	public UnitState test;
 	public Player player;
-	public Fleet fleet1;
+//	public FleetState fleet1;
 	public UnitState u;
 
 	void Awake ()

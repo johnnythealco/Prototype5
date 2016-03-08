@@ -3,9 +3,22 @@ using System.Collections;
 
 public class FleetController : MonoBehaviour
 {
-	[SerializeField]
-	private UnitController[] fleet;
+	public Player owner;
 
+	public UnitController[] fleet;
+
+	[SerializeField]
+	private FleetState fleetState;
+
+	public FleetState FleetState
+	{ 		get		{ 			return fleetState;		}	}
+
+	public void initalize()
+	{
+		fleetState = new FleetState (fleet);
+
+
+	}
 
 
 

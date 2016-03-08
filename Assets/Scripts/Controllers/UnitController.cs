@@ -4,17 +4,18 @@ using System.Collections;
 public class UnitController : MonoBehaviour
 {
 	
-	//	public UnitClass unitClass;
+	public UnitClass unitClass;
 
 	public UnitState state;
 
-	public bool initalized{ get { return state.initalized; } }
+	public bool initalized{ get; set;}
 
 
 	public void initalize ()
 	{
-		state.initalize ();
-		state.initalized = true;
+		state = new UnitState (unitClass);
+		initalized = true;
+
 	}
 
 
