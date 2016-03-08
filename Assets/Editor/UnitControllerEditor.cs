@@ -6,33 +6,36 @@ using UnityEditor;
 public class UnitControllerEditor : Editor
 {
 	UnitController _Controller;
+	
+	UnitState _unit;
 
-	Unit _unit;
-
+	
+	
+	
 	private void OnEnable ()
 	{
 		_Controller = (UnitController)target;
-
-		_unit = _Controller.unit;
-
-		if (_Controller.unitClass != null)
+	
+		_unit = _Controller.state;
+	
+		if (_unit.unitClass != null)
 		{
-			_Controller.initalize ();
+			_unit.initalize ();
 		}
-
-
+	
+	
 	}
 
 	public override void OnInspectorGUI ()
 	{
-
+	
 		DrawDefaultInspector ();
-
-		if (_Controller.unitClass != null)
+	
+		if (_unit.unitClass != null)
 		{
-			
-		
-
+	
+	
+	
 			EditorGUILayout.LabelField ("Owner:", _unit.OwnerName);
 			EditorGUILayout.LabelField ("Display Name:", _unit.DisplayName);
 			EditorGUILayout.LabelField ("Action Points:", _unit.ActionPoints.ToString ());
@@ -43,12 +46,15 @@ public class UnitControllerEditor : Editor
 			EditorGUILayout.LabelField ("Initiative:", _unit.Initiative.ToString ());
 			EditorGUILayout.LabelField ("");
 			EditorGUILayout.LabelField ("Evasion:", _unit.Evasion.ToString ());
-			if (_Controller.unitClass.enginesHealth > 0)
+			if (_unit.unitClass.enginesHealth > 0)
 				EditorGUILayout.LabelField ("Engines Health: ", _unit.EnginesHealth.ToString ());
 			EditorGUILayout.LabelField ("");
-			if (_Controller.unitClass.weaponsHealth > 0)
+			if (_unit.unitClass.weaponsHealth > 0)
 				EditorGUILayout.LabelField ("Weapons Health:", _unit.WeaponsHealth.ToString ());
-			
+	
 		}
 	}
+
+
+
 }

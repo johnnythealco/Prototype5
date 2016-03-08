@@ -3,11 +3,11 @@ using System.Collections;
 using System;
 
 [System.Serializable]
-public class Unit : System.Object
+public class UnitState : System.Object
 {
 	
 
-
+	public UnitClass unitClass;
 
 	private String displayName;
 	private int actionPoints;
@@ -18,7 +18,10 @@ public class Unit : System.Object
 	private float weaponsHealth;
 	private float movementRange;
 
+
 	public Player 		Owner { get; set; }
+
+	public bool initalized{ get; set; }
 
 
 	public String		DisplayName{ get { return displayName; } }
@@ -51,7 +54,7 @@ public class Unit : System.Object
 
 
 
-	public void initalizeUnit (UnitClass unitClass)
+	public void initalize ()
 	{
 		displayName = unitClass.displayName;
 		actionPoints = unitClass.actionPoints;
