@@ -3,12 +3,14 @@ using System.Collections;
 
 public class Testing : MonoBehaviour
 {
-	public UnitTemplateList shipTemplates;
+	public FleetController testFleet;
+
+	public static Testing Test;
 
 
-	void Start ()
+	void Awake ()
 	{
-	
+		Test = this;
 	}
 
 
@@ -20,10 +22,6 @@ public class Testing : MonoBehaviour
 
 	public void createFleet ()
 	{
-		foreach (var template in shipTemplates.templates)
-		{
-			return;
-
-		}
+		testFleet.Deploy (Battle.Manager.getDeploymentArea (Sector.northSpawn, testFleet.Size));
 	}
 }

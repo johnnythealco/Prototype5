@@ -18,5 +18,17 @@ public class UnitController : MonoBehaviour
 
 	}
 
+	public void DestroyUnit()
+	{
+		Destroy (this.gameObject);
+	}
+
+	public void Move(Vector3 position)
+	{
+		Battle.Manager.unRegisterAtPoint (this.transform.position, this); 
+		Battle.Manager.registerAtPoint (position, this); 
+		this.transform.position = position;
+	}
+
 
 }

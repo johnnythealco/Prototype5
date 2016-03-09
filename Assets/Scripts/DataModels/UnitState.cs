@@ -6,7 +6,7 @@ using System;
 public class UnitState : System.Object
 {
 	
-
+	#region Variables
 	private UnitClass unitClass;
 
 	private String displayName;
@@ -17,6 +17,7 @@ public class UnitState : System.Object
 	private float enginesHealth;
 	private float weaponsHealth;
 	private float movementRange;
+	#endregion
 
 	#region Properties
 
@@ -54,6 +55,7 @@ public class UnitState : System.Object
 
 	#endregion
 
+	#region Constructors
 	public UnitState(UnitClass _unitClass)
 	{
 		this.unitClass = _unitClass;
@@ -79,6 +81,7 @@ public class UnitState : System.Object
 		movementRange = unitClass.movementRange; 
 
 	}
+	#endregion
 
 
 }
