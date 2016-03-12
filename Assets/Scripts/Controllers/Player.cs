@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using Gamelogic.Grids;
 
 public class Player : MonoBehaviour 
@@ -8,6 +9,8 @@ public class Player : MonoBehaviour
 
 	[SerializeField]
 	private UnitController unitSelected;
+
+
 
 
 	public void Update()
@@ -43,9 +46,15 @@ public class Player : MonoBehaviour
 	private void leftClickAction(FlatHexPoint point)
 	{
 		if (Sector.Grid [point].unit != null)
-			unitSelected = Sector.Grid [point].unit;
+			SelectUnit (Sector.Grid [point].unit);
 
 		if (unitSelected != null && Sector.Grid [point].contents == Cell.Contents.empty)
 			unitSelected.Move (Sector.Map [point]);
+	}
+
+	private void SelectUnit(UnitController _unit)
+	{
+		unitSelected =_unit ;
+		Battle.Manager.unitView.Prime (_unit);
 	}
 }

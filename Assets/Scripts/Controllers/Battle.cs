@@ -10,6 +10,7 @@ public class Battle : GridBehaviour<FlatHexPoint>
 {
 
 	public static Battle Manager;
+	public UnitDisplay unitView;
 
 
 	void Awake ()

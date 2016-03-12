@@ -18,7 +18,7 @@ public class UnitControllerEditor : Editor
 	
 		_unit = _Controller.state;
 	
-		if (_Controller.unitClass != null)
+		if (_Controller.unitClass != null && !EditorApplication.isPlaying)
 		{
 			_Controller.initalize ();
 		}
@@ -57,6 +57,12 @@ public class UnitControllerEditor : Editor
 		if(GUILayout.Button("Initalize Ship Class"))
 		{
 			_Controller.initalize ();
+		}
+
+
+		if(GUILayout.Button("Damage Health by 10"))
+		{
+			_Controller.state.TakeHealthDamage (10f);
 		}
 	}
 

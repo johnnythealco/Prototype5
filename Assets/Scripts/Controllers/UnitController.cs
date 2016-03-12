@@ -13,7 +13,7 @@ public class UnitController : MonoBehaviour
 
 	public void initalize ()
 	{
-		state = new UnitState (unitClass);
+		state = new UnitState (this);
 		initalized = true;
 
 	}
