@@ -36,6 +36,11 @@ public class Testing : MonoBehaviour
 	{
 		fleetBuilderDisplay = (FleetBuilderDisplay)Instantiate (fleetBuilderDisplay);
 
+		foreach(var unit in buildableUnits)
+		{
+			unit.initalize ();
+		}
+
 		fleetBuilderDisplay.Prime (buildableUnits);
 		
 	}
