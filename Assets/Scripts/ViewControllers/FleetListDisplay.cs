@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class FleetBuilderDisplay : MonoBehaviour {
+public class FleetListDisplay : MonoBehaviour {
 
 
 	public Transform targetTransform;

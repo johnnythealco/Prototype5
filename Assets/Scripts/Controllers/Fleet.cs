@@ -7,7 +7,9 @@ public class Fleet : MonoBehaviour
 {
 	public Player owner;
 
-	public FleetState state;
+	[SerializeField]
+
+	public FleetState state; 
 
 	public int Size { get { return state.units.Count (); } }
 

@@ -12,15 +12,15 @@ public class FleetState : System.Object
 
 	public int Size	{ get { return units.Count; } }
 
-	public FleetState(List<Unit> _units )
-	{
-		units = new List<UnitState> ();
-		foreach(var unit in _units)
-		{
-
-			units.Add (unit.state);
-		}
-	}
+//	public FleetState(List<Unit> _units )
+//	{
+//		units = new List<UnitState> ();
+//		foreach(var unit in _units)
+//		{
+//
+//			units.Add (unit.state);
+//		}
+//	}
 
 
 	

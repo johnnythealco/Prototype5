@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class Testing : MonoBehaviour
 {
-	public Fleet fleet;
+	Fleet fleet;
 
-	public FleetBuilderDisplay fleetBuilderDisplay;
+	public FleetListDisplay fleetBuilderDisplay;
+	public FleetListDisplay fleetListDisplay;
+
 
 
 	public List<Unit> buildableUnits;
@@ -16,7 +18,8 @@ public class Testing : MonoBehaviour
 	void Start ()
 	{
 		UnitDisplay.onClick += UnitDisplay_onClick;
-		fleet.state.units.Clear ();
+
+
 
 	}
 
@@ -39,7 +42,7 @@ public class Testing : MonoBehaviour
 
 	public void showBuildPanel ()
 	{
-		fleetBuilderDisplay = (FleetBuilderDisplay)Instantiate (fleetBuilderDisplay);
+		fleetBuilderDisplay = (FleetListDisplay)Instantiate (fleetBuilderDisplay);
 
 		foreach (var unit in buildableUnits)
 		{
@@ -61,5 +64,12 @@ public class Testing : MonoBehaviour
 	public void LoadBattle ()
 	{
 		SceneManager.LoadScene ("TestBattle");
+	}
+
+
+	public void CreateFleet()
+	{
+		GameObject _obj = new GameObject ("Fleet");
+		fleet = _obj.AddComponent<Fleet> ();
 	}
 }

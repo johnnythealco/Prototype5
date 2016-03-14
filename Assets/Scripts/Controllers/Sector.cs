@@ -83,7 +83,8 @@ public class Sector : GLMonoBehaviour
 
 	void createSpawnpoints ()
 	{
-		int _point = size - 3;
+		int _spawnpointBuffer = size / 3;
+		int _point = size - _spawnpointBuffer;
 
 		northSpawn = new FlatHexPoint (0, _point);
 		southSpawn = new FlatHexPoint (0, -_point);
