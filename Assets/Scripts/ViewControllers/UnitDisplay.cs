@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class UnitDisplay : MonoBehaviour 
 {
-	protected UnitController unit;
+	protected Unit unit;
 	public Image sprite;
 	public Text  displayName; 
 	public Text actionPoints; 
@@ -15,11 +15,11 @@ public class UnitDisplay : MonoBehaviour
 	public Text  weaponsHealth; 
 	public Text  movementRange;
 
-	public delegate void UnitDisplayDelegate(UnitController _unit);
+	public delegate void UnitDisplayDelegate(Unit _unit);
 	public static event UnitDisplayDelegate onClick;
 
 
-	public void Prime(UnitController _unit)
+	public void Prime(Unit _unit)
 	{
 		this.unit = _unit;
 		if(displayName != null)

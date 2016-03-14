@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UnitController : MonoBehaviour
+public class Unit : MonoBehaviour
 {
 	
 	public UnitClass unitClass;
 
 	public UnitState state;
 
-	public bool initalized{ get; set;}
+	public bool initalized{ get; set; }
 
 
 	public void initalize ()
@@ -18,12 +18,12 @@ public class UnitController : MonoBehaviour
 
 	}
 
-	public void DestroyUnit()
+	public void DestroyUnit ()
 	{
 		Destroy (this.gameObject);
 	}
 
-	public void Move(Vector3 position)
+	public void Move (Vector3 position)
 	{
 		Battle.Manager.unRegisterAtPoint (this.transform.position, this); 
 		Battle.Manager.registerAtPoint (position, this); 

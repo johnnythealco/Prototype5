@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraController : MonoBehaviour 
-
+public class CameraCTRL : MonoBehaviour
 {
 	public float zoomSpeed = 10f;
 	public float minZoomFOV = 2;
@@ -10,16 +9,16 @@ public class CameraController : MonoBehaviour
 
 	public float dragSpeed = 0.25f;
 
-	public static CameraController camController;
+	public static CameraCTRL camController;
 
 	private Vector3 dragOrigin;
 
 	private Camera thisCamera;
 	public Vector3 offSet;
 
-	void Awake()
+	void Awake ()
 	{
-		thisCamera = this.GetComponent<Camera>();
+		thisCamera = this.GetComponent<Camera> ();
 		if (camController == null)
 		{
 			camController = this;
@@ -27,31 +26,31 @@ public class CameraController : MonoBehaviour
 	}
 
 
-	void LateUpdate()
+	void LateUpdate ()
 	{
 		
 		var scroll = Input.GetAxis ("Mouse ScrollWheel");
-		if(scroll > 0f)
+		if (scroll > 0f)
 		{
 			ZoomIn ();
-		}
-		else if(scroll < 0f)
+		} else if (scroll < 0f)
 		{
 			ZoomOut ();
 		}
 
 
-		if (Input.GetMouseButtonDown(1))
+		if (Input.GetMouseButtonDown (1))
 		{
 			dragOrigin = Input.mousePosition;
 			return;
 		}
 
-		if (!Input.GetMouseButton(1)) return;
+		if (!Input.GetMouseButton (1))
+			return;
 		{
-		Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - dragOrigin);
+			Vector3 pos = Camera.main.ScreenToViewportPoint (Input.mousePosition - dragOrigin);
 
-		Vector3 move = new Vector3(pos.x * dragSpeed , 0, pos.y * dragSpeed);
+			Vector3 move = new Vector3 (pos.x * dragSpeed, 0, pos.y * dragSpeed);
 
 
 			transform.Translate (move, Space.World);
@@ -61,25 +60,25 @@ public class CameraController : MonoBehaviour
 
 	}
 
-	public void ZoomIn()
+	public void ZoomIn ()
 	{
 		thisCamera.fieldOfView -= zoomSpeed;
-		if(thisCamera.fieldOfView < minZoomFOV)
+		if (thisCamera.fieldOfView < minZoomFOV)
 		{
 			thisCamera.fieldOfView = minZoomFOV;
 		}
 	}
 
-	public void ZoomOut()
+	public void ZoomOut ()
 	{
 		thisCamera.fieldOfView += zoomSpeed;
-		if(thisCamera.fieldOfView > maxZoomFOV)
+		if (thisCamera.fieldOfView > maxZoomFOV)
 		{
 			thisCamera.fieldOfView = maxZoomFOV;
 		}
 	}
 
-	public void CentreOn(Vector3 point)
+	public void CentreOn (Vector3 point)
 	{
 		this.transform.position = point + offSet;
 	}

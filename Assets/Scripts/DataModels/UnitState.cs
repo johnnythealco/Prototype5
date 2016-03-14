@@ -7,8 +7,9 @@ public class UnitState : System.Object
 {
 	
 	#region Variables
+
 	private UnitClass unitClass;
-	public UnitController unitTemplate;
+	public Unit unitTemplate;
 
 	private String displayName;
 	private int actionPoints;
@@ -18,6 +19,7 @@ public class UnitState : System.Object
 	private float enginesHealth;
 	private float weaponsHealth;
 	private float movementRange;
+
 	#endregion
 
 	#region Properties
@@ -57,20 +59,10 @@ public class UnitState : System.Object
 	#endregion
 
 	#region Constructors
-	public UnitState(UnitClass _unitClass)
-	{
-		this.unitClass = _unitClass;
-		this.displayName = _unitClass.displayName;
-		this.actionPoints = _unitClass.actionPoints;
-		this.initiative = _unitClass.initiative;
-		this.health = _unitClass.health;
-		this.evasion = _unitClass.evasion;
-		this.enginesHealth = _unitClass.enginesHealth;
-		this.weaponsHealth = _unitClass.weaponsHealth;
-		this.movementRange = _unitClass.movementRange; 
-	}
 
-	public UnitState(UnitController _template)
+
+
+	public UnitState (Unit _template)
 	{
 		this.unitTemplate = _template;
 		this.unitClass = _template.unitClass;
@@ -97,9 +89,10 @@ public class UnitState : System.Object
 		movementRange = unitClass.movementRange; 
 
 	}
+
 	#endregion
 
-	public bool TakeHealthDamage(float _dmg)
+	public bool TakeHealthDamage (float _dmg)
 	{
 		health = health - _dmg;
 

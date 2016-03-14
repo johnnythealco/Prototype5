@@ -1,42 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+
+
 public class Testing : MonoBehaviour
 {
-	public FleetController fleet;
+	public Fleet fleet;
 
 	public FleetBuilderDisplay fleetBuilderDisplay;
 
 
-	public List<UnitController> buildableUnits; 
+	public List<Unit> buildableUnits;
 
-	void Start () {
+	void Start ()
+	{
 		UnitDisplay.onClick += UnitDisplay_onClick;
-		fleet.fleet.Clear ();
+		fleet.state.units.Clear ();
 
 	}
 
-	void OnDestroy(){
+	void OnDestroy ()
+	{
 		Debug.Log (" Unsigned-up for onClick");
 		UnitDisplay.onClick -= UnitDisplay_onClick;
 	}
 
-	void UnitDisplay_onClick (UnitController _template)
+	void UnitDisplay_onClick (Unit _template)
 	{
 		var unit = new UnitState (_template);
-		unit.initalize();
-		fleet.AddUnit(unit);
-		Debug.Log( unit.DisplayName +  "Added to Fleet");
+		unit.initalize ();
+		fleet.AddUnit (unit);
+		Debug.Log (unit.DisplayName + "Added to Fleet");
 
 	}
 
 
 
-	public void showBuildPanel()
+	public void showBuildPanel ()
 	{
 		fleetBuilderDisplay = (FleetBuilderDisplay)Instantiate (fleetBuilderDisplay);
 
-		foreach(var unit in buildableUnits)
+		foreach (var unit in buildableUnits)
 		{
 			unit.initalize ();
 		}
@@ -48,7 +53,13 @@ public class Testing : MonoBehaviour
 
 	public void deployFeet ()
 	{
-		fleet.Deploy (Battle.Manager.getDeploymentArea(Sector.northSpawn, fleet.Size));
+		fleet.Deploy (Battle.Manager.getDeploymentArea (Sector.northSpawn, fleet.Size));
 
+	}
+
+
+	public void LoadBattle ()
+	{
+		SceneManager.LoadScene ("TestBattle");
 	}
 }

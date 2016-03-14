@@ -2,10 +2,10 @@
 using System.Collections;
 using UnityEditor;
 
-[CustomEditor (typeof(UnitController))]
+[CustomEditor (typeof(Unit))]
 public class UnitControllerEditor : Editor
 {
-	UnitController _Controller;
+	Unit _Controller;
 	
 	UnitState _unit;
 
@@ -14,7 +14,7 @@ public class UnitControllerEditor : Editor
 	
 	private void OnEnable ()
 	{
-		_Controller = (UnitController)target;
+		_Controller = (Unit)target;
 	
 		_unit = _Controller.state;
 	

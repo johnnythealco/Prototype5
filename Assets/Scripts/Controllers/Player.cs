@@ -3,24 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using Gamelogic.Grids;
 
-public class Player : MonoBehaviour 
+public class Player : MonoBehaviour
 {
 	public string displayName;
 
 	[SerializeField]
-	private UnitController unitSelected;
+	private Unit unitSelected;
 
 
 
 
-	public void Update()
+	public void Update ()
 	{
 		getMouseInput ();
 		
 	}
 
 
-	private void getMouseInput()
+	private void getMouseInput ()
 	{
 		
 		if (Input.GetMouseButtonDown (0))
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
 	}
 
 
-	private void leftClickAction(FlatHexPoint point)
+	private void leftClickAction (FlatHexPoint point)
 	{
 		if (Sector.Grid [point].unit != null)
 			SelectUnit (Sector.Grid [point].unit);
@@ -52,9 +52,9 @@ public class Player : MonoBehaviour
 			unitSelected.Move (Sector.Map [point]);
 	}
 
-	private void SelectUnit(UnitController _unit)
+	private void SelectUnit (Unit _unit)
 	{
-		unitSelected =_unit ;
-		Battle.Manager.unitView.Prime (_unit);
+		unitSelected = _unit;
+		BattleDisplay.BattleUI.unitDetails.Prime (_unit);
 	}
 }

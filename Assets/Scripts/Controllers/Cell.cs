@@ -6,7 +6,7 @@ using Gamelogic;
 
 public class Cell : SpriteCell
 {
-	public UnitController unit;
+	public Unit unit;
 	public bool isAccessible = true;
 	public float Cost = 1;
 	public Color[] colors;

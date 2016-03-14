@@ -12,7 +12,7 @@ public class FleetState : System.Object
 
 	public int Size	{ get { return units.Count; } }
 
-	public FleetState(List<UnitController> _units )
+	public FleetState(List<Unit> _units )
 	{
 		units = new List<UnitState> ();
 		foreach(var unit in _units)

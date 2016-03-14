@@ -10,7 +10,7 @@ public class FleetBuilderDisplay : MonoBehaviour {
 
 
 
-	public void Prime(List<UnitController> units)
+	public void Prime(List<Unit> units)
 	{
 		foreach( var unit in units)
 		{
