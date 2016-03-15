@@ -21,6 +21,6 @@ public class Player : MonoBehaviour
 	public void SelectUnit (Unit _unit)
 	{
 		unitSelected = _unit;
-		BattleDisplay.BattleUI.unitDetails.Prime (_unit);
+//		BattleDisplay.BattleUI.unitDetails.Prime (_unit);
 	}
 }

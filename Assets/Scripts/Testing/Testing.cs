@@ -8,48 +8,22 @@ public class Testing : MonoBehaviour
 {
 	Fleet fleet;
 
-	public FleetListDisplay fleetBuilderDisplay;
-	public FleetListDisplay fleetListDisplay;
+	public UnitListDisplay fleetListDisplay;
+
+	public static  Testing testing;
 
 
-
-	public List<Unit> buildableUnits;
-
-	void Start ()
+	void Awake()
 	{
-		UnitDisplay.onClick += UnitDisplay_onClick;
-
-
-
-	}
-
-	void OnDestroy ()
-	{
-		Debug.Log (" Unsigned-up for onClick");
-		UnitDisplay.onClick -= UnitDisplay_onClick;
-	}
-
-	void UnitDisplay_onClick (Unit _template)
-	{
-		var unit = new UnitState (_template);
-		unit.initalize ();
-		fleet.AddUnit (unit);
-		Debug.Log (unit.DisplayName + "Added to Fleet");
-
+		testing = this;
 	}
 
 
-
-	public void showBuildPanel ()
+	public void showFleetPanel ()
 	{
-		fleetBuilderDisplay = (FleetListDisplay)Instantiate (fleetBuilderDisplay);
+		fleetListDisplay = (UnitListDisplay)Instantiate (fleetListDisplay);
 
-		foreach (var unit in buildableUnits)
-		{
-			unit.initalize ();
-		}
 
-		fleetBuilderDisplay.Prime (buildableUnits);
 		
 	}
 
@@ -67,10 +41,6 @@ public class Testing : MonoBehaviour
 	}
 
 
-	public void CreateFleet ()
-	{
-		GameObject _obj = new GameObject ("Fleet");
-		fleet = _obj.AddComponent<Fleet> ();
-	}
+
 
 }

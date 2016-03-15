@@ -7,11 +7,20 @@ public class Fleet : MonoBehaviour
 {
 	public Player owner;
 
-	[SerializeField]
+	public List<Unit> units;
 
 	public FleetState state; 
 
 	public int Size { get { return state.units.Count (); } }
+
+	void Awake()
+	{
+		if (state == null)
+			state = new FleetState ();
+
+		if (units == null)
+			units = new List<Unit> ();
+	}
 
 
 

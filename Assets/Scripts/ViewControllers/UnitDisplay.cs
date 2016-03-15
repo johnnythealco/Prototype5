@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class UnitDisplay : MonoBehaviour
 {
-	protected Unit unit;
+	protected UnitState unit;
 	public Image sprite;
 	public Text displayName;
 	public Text actionPoints;
@@ -15,48 +15,49 @@ public class UnitDisplay : MonoBehaviour
 	public Text weaponsHealth;
 	public Text movementRange;
 
-	public delegate void UnitDisplayDelegate (Unit _unit);
+	public delegate void UnitDisplayDelegate (UnitState _unit);
 
 	public event UnitDisplayDelegate onClick;
 
 
-	public void Prime (Unit _unit)
+	public void Prime (UnitState unitState)
 	{
-		this.unit = _unit;
+		unit = unitState;
+		
 		if (displayName != null)
-			displayName.text = _unit.state.DisplayName; 
+			displayName.text = unitState.DisplayName; 
 
 		if (actionPoints != null)
-			actionPoints.text = "Action Points: " + _unit.state.ActionPoints.ToString ();
+			actionPoints.text = "Action Points: " + unitState.ActionPoints.ToString ();
 
 		if (initiative != null)
-			initiative.text = "Initiative: " + _unit.state.Initiative.ToString (); 
+			initiative.text = "Initiative: " + unitState.Initiative.ToString (); 
 		
 		if (health != null)
-			health.text = "Health: " + _unit.state.Health.ToString (); 
+			health.text = "Health: " + unitState.Health.ToString (); 
 		
 		if (evasion != null)
-			evasion.text = "Evasion: " + _unit.state.Evasion.ToString (); 
+			evasion.text = "Evasion: " + unitState.Evasion.ToString (); 
 		
 		if (enginesHealth != null)
-			enginesHealth.text = "Engines: " + _unit.state.EnginesHealth.ToString (); 
+			enginesHealth.text = "Engines: " + unitState.EnginesHealth.ToString (); 
 		
 		if (weaponsHealth != null)
-			weaponsHealth.text = "Weapons: " + _unit.state.WeaponsHealth.ToString (); 
+			weaponsHealth.text = "Weapons: " + unitState.WeaponsHealth.ToString (); 
 		
 		if (movementRange != null)
-			movementRange.text = "Movement: " + _unit.state.MovementRange.ToString ();
+			movementRange.text = "Movement: " + unitState.MovementRange.ToString ();
 	}
 
 	public void Click ()
 	{
-		Debug.Log ("Clicked " + unit.state.DisplayName);
+//		Debug.Log ("Clicked " + unit.DisplayName);
 		if (onClick != null)
 		{
 			onClick.Invoke (unit);
 		} else
 		{
-			Debug.Log ("Nobody was Listening to " + unit.state.DisplayName);
+//			Debug.Log ("Nobody was Listening to " + unit.DisplayName);
 		}
 	}
 
