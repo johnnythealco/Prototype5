@@ -3,26 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using Gamelogic.Grids;
 
-public class Player : MonoBehaviour
+[RequireComponent (typeof(Player))]
+public class PlayerInputController : MonoBehaviour
 {
-	public string displayName;
 
-	[SerializeField]
-	private Unit unitSelected;
+	private Player player;
 
-
-
+	void Awake ()
+	{
+		player = GetComponent<Player> ();
+	
+	}
 
 	public void Update ()
 	{
 		getMouseInput ();
-		
+
 	}
 
 
 	private void getMouseInput ()
 	{
-		
+
 		if (Input.GetMouseButtonDown (0))
 		{
 			var ray = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -46,15 +48,10 @@ public class Player : MonoBehaviour
 	private void leftClickAction (FlatHexPoint point)
 	{
 		if (Sector.Grid [point].unit != null)
-			SelectUnit (Sector.Grid [point].unit);
+			player.SelectUnit (Sector.Grid [point].unit);
 
-		if (unitSelected != null && Sector.Grid [point].contents == Cell.Contents.empty)
-			unitSelected.Move (Sector.Map [point]);
+		if (player.unitSelected != null && Sector.Grid [point].contents == Cell.Contents.empty)
+			player.unitSelected.Move (Sector.Map [point]);
 	}
 
-	private void SelectUnit (Unit _unit)
-	{
-		unitSelected = _unit;
-		BattleDisplay.BattleUI.unitDetails.Prime (_unit);
-	}
 }

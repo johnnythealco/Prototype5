@@ -67,9 +67,10 @@ public class Testing : MonoBehaviour
 	}
 
 
-	public void CreateFleet()
+	public void CreateFleet ()
 	{
 		GameObject _obj = new GameObject ("Fleet");
 		fleet = _obj.AddComponent<Fleet> ();
 	}
+
 }

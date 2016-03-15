@@ -6,6 +6,8 @@ public class Game : MonoBehaviour
 	
 	public static Game Manager = null;
 	public GameState state;
+	public Player player;
+
 
 
 	void Awake ()
