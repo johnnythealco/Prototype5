@@ -7,6 +7,8 @@ public class FleetConstructor : MonoBehaviour
 {
 
 	public UnitListDisplay fleetConstructorDisplay;
+	public FleetDisplay fleetListDisplay;
+
 	[SerializeField]
 	private Fleet activeFleet;
 	public List<Unit> buildableUnits;
@@ -39,7 +41,8 @@ public class FleetConstructor : MonoBehaviour
 		GameObject _obj = new GameObject ("Fleet");
 		activeFleet = _obj.AddComponent<Fleet> ();
 
-		Testing.testing.showFleetPanel (activeFleet.state);
+		showFleetPanel (activeFleet.state);
+		Game.Manager.player.fleet = activeFleet.state;
 
 	}
 
@@ -55,6 +58,14 @@ public class FleetConstructor : MonoBehaviour
 		fleetConstructorDisplay.Prime (buildableUnits);
 
 		fleetConstructorDisplay.onListItemClick += FleetConstructorDisplay_onListItemClick;
+
+	}
+
+	public void showFleetPanel (FleetState fleet)
+	{
+		fleetListDisplay = (FleetDisplay)Instantiate (fleetListDisplay);
+
+		fleetListDisplay.Prime (fleet);
 
 	}
 

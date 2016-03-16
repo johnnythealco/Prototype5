@@ -28,6 +28,7 @@ public class Sector : GLMonoBehaviour
 	{
 		
 		BuildGrid ();
+		size = Battle.sectorSize;
 
 	}
 

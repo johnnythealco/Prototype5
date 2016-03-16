@@ -11,17 +11,30 @@ public class Battle : GridBehaviour<FlatHexPoint>
 
 	public static Battle Manager;
 	public BattleState state;
-	public int sectorSize;
+	public static int sectorSize;
+	public Fleet fleet1;
 
 
 
 	void Awake ()
 	{
-		Manager = this;
-	
-		Sector sector = Instantiate (state.BattleSector) as Sector;
-		state.BattleSector.size = sectorSize;
-		state.BattleSector = sector;
+		if (Manager == null)
+			Manager = this;
+		else if (Manager != this)
+			Destroy (gameObject);    
+
+
+		//Sets this to not be destroyed when reloading scene
+		DontDestroyOnLoad (gameObject);
+
+		CreateSector ();
+
+
+	}
+
+	void Start()
+	{
+
 	}
 
 
@@ -59,6 +72,33 @@ public class Battle : GridBehaviour<FlatHexPoint>
 			result.Add (Sector.Map [_point]);
 		}
 		return result;
+	}
+
+	void CreateSector()
+	{
+		if (Game.Manager.battleState.BattleSector != null)
+			sectorSize = Game.Manager.battleState.BattleSector.size;
+
+		Sector sector = Instantiate (state.BattleSector) as Sector;
+		state.BattleSector.size = sectorSize;
+		state.BattleSector = sector;
+	
+	}
+
+
+	public void CreateFleet (FleetState _fleet)
+	{
+		GameObject _obj = new GameObject ("Fleet");
+		fleet1 = _obj.AddComponent<Fleet> (); 
+		fleet1.state = _fleet;
+	}
+
+	public void DeployFleet()
+	{
+		CreateFleet (Game.Manager.player.fleet);
+		var deploymentArea = getDeploymentArea (Sector.northSpawn, fleet1.Size); 
+		fleet1.Deploy (deploymentArea);
+
 	}
 
 

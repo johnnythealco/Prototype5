@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 {
 	public string displayName;
 
-	private FleetState fleet;
+	public FleetState fleet;
 
 	public Unit unitSelected;
 

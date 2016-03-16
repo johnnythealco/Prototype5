@@ -7,10 +7,9 @@ using UnityEngine.SceneManagement;
 public class Testing : MonoBehaviour
 {
 
-
-	public FleetDisplay fleetListDisplay;
-
 	public static  Testing testing;
+	public int sectorSize;
+	public Sector BattleSectorPrefab;
 
 
 	void Awake ()
@@ -19,25 +18,16 @@ public class Testing : MonoBehaviour
 	}
 
 
-	public void showFleetPanel (FleetState fleet)
-	{
-		fleetListDisplay = (FleetDisplay)Instantiate (fleetListDisplay);
-
-		fleetListDisplay.Prime (fleet);
-		
-	}
-
-
-	public void deployFeet ()
-	{
-//		fleet.Deploy (Battle.Manager.getDeploymentArea (Sector.northSpawn, fleet.Size));
-
-	}
-
-
 	public void LoadBattle ()
 	{
+		Game.Manager.battleState.BattleSector.size = sectorSize;
 		SceneManager.LoadScene ("TestBattle");
+	}
+
+	public void CreateBattleState()
+	{
+
+
 	}
 
 

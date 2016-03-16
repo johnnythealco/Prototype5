@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class FleetDisplay : MonoBehaviour
 {
 	protected FleetState fleet;
+
 	public Transform targetTransform;
 	public UnitDisplay unitDisplayPrefab;
 
@@ -37,14 +39,7 @@ public class FleetDisplay : MonoBehaviour
 		fleet = _fleet;
 		fleet.onChanged += handleOnChanged;
 
-		//Clear the existing items
-		for (int i = 0; i < targetTransform.childCount; i++)
-		{
-			Destroy (targetTransform.GetChild (i).gameObject);
-		}
 
-		//create an new untiDisplay for each unit & prime it
-		//subscribe to it's onClick event
 		foreach (var unit in _fleet.units)
 		{
 			UnitDisplay unitItem = (UnitDisplay)Instantiate (unitDisplayPrefab);
@@ -57,7 +52,7 @@ public class FleetDisplay : MonoBehaviour
 
 	void handleOnChanged ()
 	{
-		Prime (fleet);
+		UpdateDisplay (fleet);
 	}
 
 	void UnitItem_onClick (UnitState _unit)
@@ -67,5 +62,31 @@ public class FleetDisplay : MonoBehaviour
 			onListItemClick.Invoke (_unit);
 		} 
 	}
+  
+
+	void UpdateDisplay(FleetState _fleet)
+		{
+
+		foreach(var item in unitDisplays)
+		{
+			item.onClick -= UnitItem_onClick;
+		}
+
+		for (int i = 0; i < targetTransform.childCount; i++)
+		{
+			Destroy (targetTransform.GetChild (i).gameObject);
+		}
+
+		foreach (var unit in _fleet.units) 
+		{
+			UnitDisplay unitItem = (UnitDisplay)Instantiate (unitDisplayPrefab);
+			unitItem.transform.SetParent (targetTransform, false);
+			unitItem.Prime (unit);
+			unitItem.onClick += UnitItem_onClick;
+			unitDisplays.Add (unitItem);
+		}
+		
+			
+		}
 
 }
