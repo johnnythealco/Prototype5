@@ -2,9 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/* A Class to display a List of UnitStates
+ * When primed it will create a unitDisplay for each unit in the list
+ * and subscribe to the OnClick event of each unitDisplay created
+ * It povides an onListItemClick event that can be subscribed to
+ */
 public class UnitListDisplay : MonoBehaviour
 {
-
+	// Target should be a Vertical Layout Group
 	public Transform targetTransform;
 	public UnitDisplay unitDisplayPrefab;
 
@@ -12,9 +17,11 @@ public class UnitListDisplay : MonoBehaviour
 
 	public event UnitListDisplayDelegate onListItemClick;
 
+	//List to record what unitDisplays have been created
+	//This is to enabel each to be unscuscribed from when this is destroyed
 	private List<UnitDisplay> unitDisplays;
 
-	void Awake()
+	void Awake ()
 	{
 		unitDisplays = new List<UnitDisplay> ();
 	}
@@ -43,13 +50,10 @@ public class UnitListDisplay : MonoBehaviour
 
 	void Display_onClick (UnitState _unit)
 	{
-//		Debug.Log ("Clicked " + _unit.DisplayName);
+
 		if (onListItemClick != null)
 		{
 			onListItemClick.Invoke (_unit);
-		} else
-		{
-//			Debug.Log ("Nobody was Listening to " + _unit.DisplayName);
-		}
+		} 
 	}
 }

@@ -7,19 +7,14 @@ public class Fleet : MonoBehaviour
 {
 	public Player owner;
 
-	public List<Unit> units;
-
-	public FleetState state; 
+	public FleetState state;
 
 	public int Size { get { return state.units.Count (); } }
 
-	void Awake()
+	void Awake ()
 	{
 		if (state == null)
 			state = new FleetState ();
-
-		if (units == null)
-			units = new List<Unit> ();
 	}
 
 
@@ -31,21 +26,10 @@ public class Fleet : MonoBehaviour
 			Unit unit = Instantiate (state.units [i].unitTemplate, _position [i], Quaternion.identity) as Unit;
 			unit.state = state.units [i];
 			Battle.Manager.registerAtPoint (_position [i], unit);
-	
-
 		}
 	}
 
-	public void AddUnit (UnitState _unit)
-	{
-		state.units.Add (_unit);
 
-	}
-
-	public void RemoveUnit (UnitState _unit)
-	{
-		state.units.Remove (_unit);
-	}
 
 
 }

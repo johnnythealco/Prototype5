@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Gamelogic.Grids;
 
+
+/*
+ * A Class to take input from the Player and pass it to the Player Class
+ * */
+
+
 [RequireComponent (typeof(Player))]
 public class PlayerInputController : MonoBehaviour
 {

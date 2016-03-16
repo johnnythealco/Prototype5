@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Gamelogic.Grids;
 
+/*
+ *Class representing the Player
+ *Only one instance of this class should exist per player
+ *There should be one for each player in a multiplayer gaem
+ */
+
 public class Player : MonoBehaviour
 {
 	public string displayName;
@@ -21,6 +27,5 @@ public class Player : MonoBehaviour
 	public void SelectUnit (Unit _unit)
 	{
 		unitSelected = _unit;
-//		BattleDisplay.BattleUI.unitDetails.Prime (_unit);
 	}
 }

@@ -2,6 +2,10 @@
 using System.Collections;
 using UnityEngine.UI;
 
+/*
+ * A Class to Display a UnitState
+ * Has an onClick Event that can be subscribed to
+*/
 public class UnitDisplay : MonoBehaviour
 {
 	protected UnitState unit;
@@ -17,6 +21,9 @@ public class UnitDisplay : MonoBehaviour
 
 	public delegate void UnitDisplayDelegate (UnitState _unit);
 
+	/*
+	 * OnClick Event that takes a UnitState parameter
+	 */
 	public event UnitDisplayDelegate onClick;
 
 
@@ -51,13 +58,12 @@ public class UnitDisplay : MonoBehaviour
 
 	public void Click ()
 	{
-//		Debug.Log ("Clicked " + unit.DisplayName);
 		if (onClick != null)
 		{
 			onClick.Invoke (unit);
 		} else
 		{
-//			Debug.Log ("Nobody was Listening to " + unit.DisplayName);
+
 		}
 	}
 

@@ -3,14 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class FleetConstructor : MonoBehaviour {
+public class FleetConstructor : MonoBehaviour
+{
 
 	public UnitListDisplay fleetConstructorDisplay;
 	[SerializeField]
 	private Fleet activeFleet;
 	public List<Unit> buildableUnits;
 
-	void Start () {
+	void Start ()
+	{
 		showBuildPanel ();	
 	}
 
@@ -26,16 +28,18 @@ public class FleetConstructor : MonoBehaviour {
 		{
 			var unit = new UnitState (_unit.unitTemplate);
 			unit.initalize ();
-			activeFleet.AddUnit (unit);
+			activeFleet.state.AddUnit (unit);
 			Debug.Log (unit.DisplayName + "Added to Fleet");
 		}
 	}
-	
+
 
 	public void CreateFleet ()
 	{
 		GameObject _obj = new GameObject ("Fleet");
-		activeFleet =  _obj.AddComponent<Fleet> ();
+		activeFleet = _obj.AddComponent<Fleet> ();
+
+		Testing.testing.showFleetPanel (activeFleet.state);
 
 	}
 

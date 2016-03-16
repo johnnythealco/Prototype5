@@ -6,31 +6,31 @@ using UnityEngine.SceneManagement;
 
 public class Testing : MonoBehaviour
 {
-	Fleet fleet;
 
-	public UnitListDisplay fleetListDisplay;
+
+	public FleetDisplay fleetListDisplay;
 
 	public static  Testing testing;
 
 
-	void Awake()
+	void Awake ()
 	{
 		testing = this;
 	}
 
 
-	public void showFleetPanel ()
+	public void showFleetPanel (FleetState fleet)
 	{
-		fleetListDisplay = (UnitListDisplay)Instantiate (fleetListDisplay);
+		fleetListDisplay = (FleetDisplay)Instantiate (fleetListDisplay);
 
-
+		fleetListDisplay.Prime (fleet);
 		
 	}
 
 
 	public void deployFeet ()
 	{
-		fleet.Deploy (Battle.Manager.getDeploymentArea (Sector.northSpawn, fleet.Size));
+//		fleet.Deploy (Battle.Manager.getDeploymentArea (Sector.northSpawn, fleet.Size));
 
 	}
 
