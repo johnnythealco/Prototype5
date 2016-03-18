@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Game : MonoBehaviour
 {
@@ -8,6 +10,11 @@ public class Game : MonoBehaviour
 	public GameState state;
 	public Player player;
 	public BattleState battleState;
+	public List<Faction> factionList;
+
+
+
+
 
 
 
@@ -30,4 +37,31 @@ public class Game : MonoBehaviour
 	{
 		return;
 	}
+
+	public List<string> getfactionNameList()
+	{ 
+		var result = new List<string> (); 
+		foreach (var faction in factionList)
+		{
+			result.Add (faction.FactionName);
+		}
+
+		return result;
+	}
+
+	public Faction getFaction(int index)
+	{
+		if (index <= factionList.Count () && index > -1)
+		{
+			return factionList [index];
+		}
+		else
+		{
+			Debug.Log("Faction not Found!");
+			return factionList [0];
+		}
+			
+
+	}
+
 }

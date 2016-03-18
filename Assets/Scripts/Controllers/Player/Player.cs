@@ -12,6 +12,7 @@ using Gamelogic.Grids;
 public class Player : MonoBehaviour
 {
 	public string displayName;
+	public Faction faction;
 
 	public FleetState fleet;
 
