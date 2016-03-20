@@ -56,7 +56,7 @@ public class PlayerInputController : MonoBehaviour
 		if (Sector.Grid [point].unit != null)
 			player.SelectUnit (Sector.Grid [point].unit);
 
-		if (player.unitSelected != null && Sector.Grid [point].contents == Cell.Contents.empty)
+		if (player.unitSelected != null && Sector.Grid [point].contents == BattleCell.Contents.empty)
 			player.unitSelected.Move (Sector.Map [point]);
 	}
 

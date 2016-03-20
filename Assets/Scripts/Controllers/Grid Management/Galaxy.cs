@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using Gamelogic;
 using Gamelogic.Grids;
 
-
-public class Sector : GLMonoBehaviour
+[RequireComponent(typeof(BoxCollider))]
+public class Galaxy : GLMonoBehaviour
 {
-	public Cell cellPrefab;
-	public int size = 12;
+	public GalaxyCell cellPrefab;
+	public int size = 120;
 	public Vector2 padding;
 
 
-	public static FlatHexGrid<Cell> Grid{ get; set; }
+	public static FlatHexGrid<GalaxyCell> Grid{ get; set; }
 
 	public static IMap3D<FlatHexPoint> Map{ get; set; }
 
@@ -26,9 +26,8 @@ public class Sector : GLMonoBehaviour
 
 	void Start ()
 	{
-		
+//		size = Game.Manager;
 		BuildGrid ();
-		size = Battle.sectorSize;
 
 	}
 
@@ -50,7 +49,7 @@ public class Sector : GLMonoBehaviour
 		var spacing = cellPrefab.Dimensions;
 		spacing.Scale (padding);
 
-		Grid = FlatHexGrid<Cell>.Hexagon (size);
+		Grid = FlatHexGrid<GalaxyCell>.Hexagon (size);
 		Map = new FlatHexMap (spacing).AnchorCellMiddleCenter ().To3DXZ ();
 
 		foreach (var point in Grid)
@@ -113,12 +112,12 @@ public class Sector : GLMonoBehaviour
 		List<FlatHexPoint> path = new List<FlatHexPoint> ();
 
 
-		var _path = Algorithms.AStar<Cell, FlatHexPoint>
+		var _path = Algorithms.AStar<GalaxyCell, FlatHexPoint>
 		(Grid, start, end,
-			            (p, q) => p.DistanceFrom (q),
-			            c => c.isAccessible,
-			            (p, q) => (Grid [p].Cost + Grid [q].Cost / 2)
-		            );
+			(p, q) => p.DistanceFrom (q),
+			c => c.isAccessible,
+			(p, q) => (Grid [p].Cost + Grid [q].Cost / 2)
+		);
 
 		foreach (var step in _path)
 		{

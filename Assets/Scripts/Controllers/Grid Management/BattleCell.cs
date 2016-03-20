@@ -4,8 +4,8 @@ using Gamelogic.Grids;
 using Gamelogic;
 
 
-public class Cell : SpriteCell
-{
+public class BattleCell : SpriteCell {
+
 	public Unit unit;
 	public bool isAccessible = true;
 	public float Cost = 1;
@@ -14,12 +14,9 @@ public class Cell : SpriteCell
 
 
 
-
-
-
 	public enum Contents
 	{
-empty,
+		empty,
 		unit
 
 	}

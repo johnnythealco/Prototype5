@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
@@ -9,11 +10,12 @@ public class Game : MonoBehaviour
 	public static Game Manager = null;
 	public GameState state;
 	public Player player;
-	public BattleState battleState;
+
 	public List<Faction> factionList;
 
 
-
+	private BattleState battleLoadState;
+	public BattleState BattleLoadState{get{return battleLoadState;}}
 
 
 
@@ -61,6 +63,13 @@ public class Game : MonoBehaviour
 			return factionList [0];
 		}
 			
+
+	}
+
+	public void LoadBattle(Dictionary<FleetState, int> _fleets_SpawnPoints, int _sectorSize, string _sectorName)
+	{
+		battleLoadState = new BattleState( _fleets_SpawnPoints, _sectorSize,_sectorName); 
+		SceneManager.LoadScene ("TestBattle"); 
 
 	}
 

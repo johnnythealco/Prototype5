@@ -5,6 +5,9 @@ using Gamelogic;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.SceneManagement;
+
+
 
 public class Battle : GridBehaviour<FlatHexPoint>
 {
@@ -27,7 +30,11 @@ public class Battle : GridBehaviour<FlatHexPoint>
 		//Sets this to not be destroyed when reloading scene
 		DontDestroyOnLoad (gameObject);
 
-		CreateSector ();
+		if(Game.Manager.BattleLoadState != null)
+			state = Game.Manager.BattleLoadState;
+		else
+			Debug.Log("No BattleState Loaded!");
+//			SceneManager.LoadScene ("Galaxy");
 
 
 	}
@@ -41,7 +48,7 @@ public class Battle : GridBehaviour<FlatHexPoint>
 	public void registerAtPoint (Vector3 point, Unit unit)
 	{
 		var _point = Sector.Map [point];
-		Sector.Grid [_point].contents = Cell.Contents.unit;
+		Sector.Grid [_point].contents = BattleCell.Contents.unit;
 		Sector.Grid [_point].unit = unit;
 		Sector.Grid [_point].isAccessible = false;
 			
@@ -50,7 +57,7 @@ public class Battle : GridBehaviour<FlatHexPoint>
 	public void unRegisterAtPoint (Vector3 point, Unit unit)
 	{
 		var _point = Sector.Map [point];
-		Sector.Grid [_point].contents = Cell.Contents.empty; 
+		Sector.Grid [_point].contents = BattleCell.Contents.empty; 
 		Sector.Grid [_point].unit = null;
 		Sector.Grid [_point].isAccessible = true;
 
@@ -59,7 +66,7 @@ public class Battle : GridBehaviour<FlatHexPoint>
 	public List<Vector3> getDeploymentArea (FlatHexPoint point, int radius)
 	{
 		List<Vector3> result = new List<Vector3> ();
-		var area = Algorithms.GetPointsInRange<Cell, FlatHexPoint>
+		var area = Algorithms.GetPointsInRange<BattleCell, FlatHexPoint>
 			(Sector.Grid, point,
 			           JKCell => JKCell.isAccessible,
 			           (p, q) => 1,
@@ -74,16 +81,16 @@ public class Battle : GridBehaviour<FlatHexPoint>
 		return result;
 	}
 
-	void CreateSector()
-	{
-		if (Game.Manager.battleState.BattleSector != null)
-			sectorSize = Game.Manager.battleState.BattleSector.size;
-
-		Sector sector = Instantiate (state.BattleSector) as Sector;
-		state.BattleSector.size = sectorSize;
-		state.BattleSector = sector;
-	
-	}
+//	void CreateSector()
+//	{
+//		if (Game.Manager.battleState.BattleSector != null)
+//			sectorSize = Game.Manager.battleState.BattleSector.size;
+//
+//		Sector sector = Instantiate (state.BattleSector) as Sector;
+//		state.BattleSector.size = sectorSize;
+//		state.BattleSector = sector;
+//	
+//	}
 
 
 	public void CreateFleet (FleetState _fleet)
