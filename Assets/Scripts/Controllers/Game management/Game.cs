@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using System;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 public class Game : MonoBehaviour
 {
@@ -70,6 +73,18 @@ public class Game : MonoBehaviour
 	{
 		battleLoadState = new BattleState( _fleets_SpawnPoints, _sectorSize,_sectorName); 
 		SceneManager.LoadScene ("TestBattle"); 
+
+	}
+
+	public void SaveBattleState()
+	{
+		BinaryFormatter bf = new BinaryFormatter ();
+		FileStream file = File.Open (Application.persistentDataPath + "/gamefile.dat", FileMode.OpenOrCreate);
+		Debug.Log ("FilePath " + Application.persistentDataPath + "/gamefile.dat");
+
+		bf.Serialize (file, Battle.Manager.state);
+		file.Close();
+
 
 	}
 

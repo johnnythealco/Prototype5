@@ -42,24 +42,29 @@ public class Battle : GridBehaviour<FlatHexPoint>
 	void Start()
 	{
 
+		deployFleetsatSpawnpoints ();
 	}
 
 
 	public void registerAtPoint (Vector3 point, Unit unit)
 	{
-		var _point = Sector.Map [point];
-		Sector.Grid [_point].contents = BattleCell.Contents.unit;
-		Sector.Grid [_point].unit = unit;
-		Sector.Grid [_point].isAccessible = false;
+		var _cell = Sector.Grid [Sector.Map [point]].state;
+		_cell.contents = BattleCellState.Contents.unit;
+		_cell.unit = unit;
+		_cell.isAccessible = false;
+
+		Battle.Manager.state.occupiedCells.Add (_cell);
 			
 	}
 
 	public void unRegisterAtPoint (Vector3 point, Unit unit)
 	{
-		var _point = Sector.Map [point];
-		Sector.Grid [_point].contents = BattleCell.Contents.empty; 
-		Sector.Grid [_point].unit = null;
-		Sector.Grid [_point].isAccessible = true;
+		var _cell = Sector.Grid [Sector.Map [point]].state;
+		_cell.contents = BattleCellState.Contents.empty; 
+		_cell.unit = null;
+		_cell.isAccessible = true;
+
+		Battle.Manager.state.occupiedCells.Remove (_cell);
 
 	}
 
@@ -93,19 +98,59 @@ public class Battle : GridBehaviour<FlatHexPoint>
 //	}
 
 
-	public void CreateFleet (FleetState _fleet)
+	public Fleet CreateFleet (FleetState _fleet)
 	{
 		GameObject _obj = new GameObject ("Fleet");
-		fleet1 = _obj.AddComponent<Fleet> (); 
-		fleet1.state = _fleet;
+		var fleet = _obj.AddComponent<Fleet> (); 
+		fleet.state = _fleet;
+		return fleet;
 	}
 
-	public void DeployFleet()
+	public void DeployFleet(FleetState _fleet, FlatHexPoint _spawnPoint)
 	{
-		CreateFleet (Game.Manager.player.fleet);
-		var deploymentArea = getDeploymentArea (Sector.northSpawn, fleet1.Size); 
-		fleet1.Deploy (deploymentArea);
+		
+		var fleet = CreateFleet (_fleet);
+		var deploymentArea = getDeploymentArea (_spawnPoint, _fleet.Size); 
+		fleet.Deploy (deploymentArea);
+	
+	}
 
+	private void deployFleetsatSpawnpoints()
+	{
+		foreach(var _fleet in state.Fleets_SpawnPoints.Keys)
+		{
+			switch(state.Fleets_SpawnPoints[_fleet])
+			{
+			case 0:
+				DeployFleet (_fleet, Sector.centerSpawn);
+				break;
+			case 1:
+				DeployFleet (_fleet, Sector.northSpawn);
+				break;
+			case 2:
+				DeployFleet (_fleet, Sector.northEastSpwan);
+				break;
+			case 3:
+				DeployFleet (_fleet, Sector.southEastSpwan);
+				break;
+			case 4:
+				DeployFleet (_fleet, Sector.southSpawn);
+				break;
+			case 5:
+				DeployFleet (_fleet, Sector.southWestSpawn);
+				break;
+			case 6:
+				DeployFleet (_fleet, Sector.northWestSpawn);
+				break;
+			default:
+				Debug.Log("No Spawn point Found");
+				break;
+
+			}
+
+
+
+		}
 	}
 
 

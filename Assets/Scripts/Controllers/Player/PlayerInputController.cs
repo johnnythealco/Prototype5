@@ -53,10 +53,10 @@ public class PlayerInputController : MonoBehaviour
 
 	private void leftClickAction (FlatHexPoint point)
 	{
-		if (Sector.Grid [point].unit != null)
-			player.SelectUnit (Sector.Grid [point].unit);
+		if (Sector.Grid [point].state.unit != null)
+			player.SelectUnit (Sector.Grid [point].state.unit);
 
-		if (player.unitSelected != null && Sector.Grid [point].contents == BattleCell.Contents.empty)
+		if (player.unitSelected != null && Sector.Grid [point].state.contents == BattleCellState.Contents.empty)
 			player.unitSelected.Move (Sector.Map [point]);
 	}
 

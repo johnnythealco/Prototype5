@@ -6,19 +6,6 @@ using Gamelogic;
 
 public class BattleCell : SpriteCell {
 
-	public Unit unit;
+	public BattleCellState state;
 	public bool isAccessible = true;
-	public float Cost = 1;
-	public Color[] colors;
-	public Contents contents;
-
-
-
-	public enum Contents
-	{
-		empty,
-		unit
-
-	}
-
 }

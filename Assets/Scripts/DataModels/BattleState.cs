@@ -10,6 +10,10 @@ public class BattleState : System.Object
 	public int battleSectorSize;
 	public string SectorName;
 
+
+	public List<BattleCellState> allCells;
+	public List<BattleCellState> occupiedCells;
+
 	public BattleState( Dictionary<FleetState, int>  _fleets_SpawnPoints, int _sectorSize,string _sectorName)
 	{
 		Fleets_SpawnPoints = _fleets_SpawnPoints;

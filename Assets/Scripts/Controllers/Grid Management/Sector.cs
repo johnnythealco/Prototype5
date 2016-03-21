@@ -47,10 +47,13 @@ public class Sector : GLMonoBehaviour
 
 		Grid = FlatHexGrid<BattleCell>.Hexagon (size);
 		Map = new FlatHexMap (spacing).AnchorCellMiddleCenter ().To3DXZ ();
-
+		Battle.Manager.state.allCells = new List<BattleCellState> ();
+		Battle.Manager.state.occupiedCells = new List<BattleCellState> ();
 		foreach (var point in Grid)
 		{
 			var cell = Instantiate (battleCellPrefab);
+//			cell.state.coordinates.x = point.X;
+//			cell.state.coordinates.y = point.Y;
 			Vector3 worldPoint = Map [point];
 			cell.transform.parent = this.transform;
 			cell.transform.localScale = Vector3.one;
@@ -58,6 +61,7 @@ public class Sector : GLMonoBehaviour
 
 			cell.name = point.ToString ();
 			Grid [point] = cell;
+			Battle.Manager.state.allCells.Add (cell.state);
 
 		}
 		positionCollider ();
@@ -112,8 +116,8 @@ public class Sector : GLMonoBehaviour
 		var _path = Algorithms.AStar<BattleCell, FlatHexPoint>
 		(Grid, start, end,
 			            (p, q) => p.DistanceFrom (q),
-			            c => c.isAccessible,
-			            (p, q) => (Grid [p].Cost + Grid [q].Cost / 2)
+			            c => c.state.isAccessible,
+			            (p, q) => (Grid [p].state.Cost + Grid [q].state.Cost / 2)
 		            );
 
 		foreach (var step in _path)
@@ -145,6 +149,7 @@ public class Sector : GLMonoBehaviour
 
 		return path;
 	}
+
 
 
 
